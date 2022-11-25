@@ -6,7 +6,7 @@ import Contact from './componrnts/Contact.vue';
 
 const routes = [
     {
-        path:'/',
+        path:'',
         name:'home',
         component:Home
     },
