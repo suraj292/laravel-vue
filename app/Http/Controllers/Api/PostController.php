@@ -18,7 +18,7 @@ class PostController extends Controller
         $post = Post::all();
         return response([
             'status' => true,
-            'Post' => $post
+            'post' => $post
         ], 200);
     }
 
@@ -54,7 +54,7 @@ class PostController extends Controller
     {
         return response([
             'status' => true,
-            'Post' => $post
+            'post' => $post
         ], 200);
     }
 
