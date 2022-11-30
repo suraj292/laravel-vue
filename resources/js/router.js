@@ -1,8 +1,10 @@
 import {createRouter, createWebHistory} from "vue-router";
 
-import Home from './componrnts/Home.vue';
-import About from './componrnts/About.vue';
-import Contact from './componrnts/Contact.vue';
+import Home from './components/Home.vue';
+import About from './components/About.vue';
+import Contact from './components/Contact.vue';
+import PostAll from './Post/Post.vue';
+import PostStore from './Post/PostStore.vue';
 
 const routes = [
     {
@@ -20,6 +22,17 @@ const routes = [
         name:'contact',
         component:Contact
     },
+    {
+        path:'/post',
+        name:'post',
+        component:PostAll
+    },
+    {
+        path:'/post/store',
+        name:'post store',
+        component:PostStore
+    },
+
 ];
 
 const router = createRouter({
