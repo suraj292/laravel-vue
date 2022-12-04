@@ -20,6 +20,7 @@
                         <ul class="dropdown-menu">
                             <router-link class="dropdown-item" to="/post">Post All</router-link>
                             <router-link class="dropdown-item" to="/post/store">Post Create</router-link>
+<!--                            <router-link class="dropdown-item" to="/post/edit/:postId">Post edit</router-link>-->
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -1,6 +1,7 @@
 <template>
     <div class="container mt-5">
         <div class="row py-5 px-3 rounded form-div" style="background-color: white; width: 60%; margin: auto;">
+            <div class="alert alert-success" v-if="deleteSuccess">Post has been deleted.</div>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -12,12 +13,12 @@
                 </thead>
                 <tbody>
                 <tr v-for="(post, index) in posts" :key="index" >
-                    <th scope="row">{{ 11 }}</th>
+                    <th scope="row">{{ index+1 }}</th>
                     <td>{{ post.title }}</td>
                     <td>{{ post.content }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary mx-1">Edit</button>
-                        <button class="btn btn-sm btn-danger mx-1">Delete</button>
+                        <router-link class="btn btn-sm btn-primary mx-1" :to="`/post/edit/${post.id}`">Edit</router-link>
+                        <button class="btn btn-sm btn-danger mx-1" @click="postDelete(post.id)">Delete</button>
                     </td>
                 </tr>
                 </tbody>
@@ -28,11 +29,14 @@
 
 <script>
 import Post from "../connection/PostService";
+import PostStore from "./PostStore.vue";
 export default {
     name: "Post",
+    components: {PostStore},
     data() {
         return {
             posts: [],
+            deleteSuccess: null,
         }
     },
     methods: {
@@ -40,7 +44,17 @@ export default {
             Post.getAll()
                 .then(response => {
                     this.posts = response.data.post;
-                    console.log(response.data);
+                    // console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+        postDelete($id){
+            Post.delete($id)
+                .then(response => {
+                    this.getPosts()
+                    this.deleteSuccess = true;
                 })
                 .catch(e => {
                     console.log(e);
@@ -54,5 +68,7 @@ export default {
 </script>
 
 <style scoped>
-
+.form-div{
+    background-color: white; width: 50%; margin: auto;
+}
 </style>

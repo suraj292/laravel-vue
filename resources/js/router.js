@@ -5,6 +5,7 @@ import About from './components/About.vue';
 import Contact from './components/Contact.vue';
 import PostAll from './Post/Post.vue';
 import PostStore from './Post/PostStore.vue';
+import PostEdit from './Post/PostEdit.vue';
 
 const routes = [
     {
@@ -32,7 +33,11 @@ const routes = [
         name:'post store',
         component:PostStore
     },
-
+    {
+        path:'/post/edit/:postId',
+        name:'post-edit',
+        component:PostEdit
+    },
 ];
 
 const router = createRouter({
