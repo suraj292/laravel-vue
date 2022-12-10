@@ -25,18 +25,11 @@ const routes = [
     },
     {
         path:'/post',
-        name:'post',
-        component:PostAll
-    },
-    {
-        path:'/post/store',
-        name:'post store',
-        component:PostStore
-    },
-    {
-        path:'/post/edit/:postId',
-        name:'post-edit',
-        component:PostEdit
+        children: [
+            { path: "", name:'post', component: PostAll },
+            { path: "store", name:'post store', component: PostStore },
+            { path: "edit/:postId", name:'post-edit', component: PostEdit }
+        ]
     },
 ];
 
