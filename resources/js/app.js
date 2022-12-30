@@ -10,10 +10,4 @@ createApp(App)
     .use(router)
     .mount("#app")
 
-// const app = createApp({
-//     components:{
-//         App,
-//     }
-// });
-// app.mount("#app")
 

@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = User::where('email', $request->email)->first();
             $token = $user->createToken($user->email)->plainTextToken;
-            $response = ['token' => $token];
+            $response = ['token' => $token, 'user' => $user];
             return response($response, 200);
         } else {
             $response = ["message" =>'Unauthorized access'];

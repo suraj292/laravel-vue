@@ -13,7 +13,7 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/about">About</router-link>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" v-if="Auth">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Post
                         </a>
@@ -26,6 +26,12 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/contact">Contact</router-link>
                     </li>
+                    <li class="nav-item" v-if="!Auth">
+                        <router-link class="nav-link active" aria-current="page" to="/login">Login</router-link>
+                    </li>
+                    <li class="nav-item" v-if="Auth">
+                        <span class="nav-link active" @click="logout" style="cursor: pointer">Logout</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -35,7 +41,27 @@
 
 <script>
 export default {
-    name: "App"
+    name: "App",
+    data() {
+        return {
+            Auth: null,
+        }
+    },
+    methods:{
+        logged(){
+            if (localStorage.getItem('token')){
+                this.Auth = true
+            }
+        },
+        logout(){
+            localStorage.setItem('token', null)
+            this.Auth = null
+            this.$router.push({name: 'Login'})
+        }
+    },
+    mounted() {
+        this.logged()
+    }
 }
 </script>
 

@@ -7,13 +7,13 @@ use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\AuthController;
 
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::apiResource('post', PostController::class)->middleware('auth:sanctum');
 
-Route::apiResource('user', UserController::class);
+Route::apiResource('user', UserController::class)->only(['store', 'update']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
