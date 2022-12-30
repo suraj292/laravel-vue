@@ -36,11 +36,8 @@ export default {
             };
             http.post('/login', data)
                 .then(res => {
-                    // store.state.user.token = res.data.token
-                    localStorage.setItem('token', res.data.token);
-                    this.$emit('Auth')
-                    this.$router.push("/post")
-                    console.log(res.data.token)
+                    store.dispatch('setToken', res.data);
+                    this.$router.push({name: 'Home'})
                 })
                 .catch(error => {
                     console.log(error)

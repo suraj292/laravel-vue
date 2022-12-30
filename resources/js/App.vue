@@ -13,7 +13,7 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/about">About</router-link>
                     </li>
-                    <li class="nav-item dropdown" v-if="Auth">
+                    <li class="nav-item dropdown" v-if="store.getters.getToken.token">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Post
                         </a>
@@ -26,10 +26,10 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/contact">Contact</router-link>
                     </li>
-                    <li class="nav-item" v-if="!Auth">
+                    <li class="nav-item" v-if="!store.getters.getToken.token">
                         <router-link class="nav-link active" aria-current="page" to="/login">Login</router-link>
                     </li>
-                    <li class="nav-item" v-if="Auth">
+                    <li class="nav-item" v-if="store.getters.getToken.token">
                         <span class="nav-link active" @click="logout" style="cursor: pointer">Logout</span>
                     </li>
                 </ul>
@@ -40,8 +40,15 @@
 </template>
 
 <script>
+import store from "./connection/store";
+
 export default {
     name: "App",
+    computed: {
+        store() {
+            return store
+        }
+    },
     data() {
         return {
             Auth: null,
@@ -49,18 +56,12 @@ export default {
     },
     methods:{
         logged(){
-            if (localStorage.getItem('token')){
-                this.Auth = true
-            }
+
         },
         logout(){
-            localStorage.setItem('token', null)
-            this.Auth = null
+            store.dispatch('removeToken')
             this.$router.push({name: 'Login'})
         }
-    },
-    mounted() {
-        this.logged()
     }
 }
 </script>

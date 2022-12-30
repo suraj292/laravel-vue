@@ -13,18 +13,20 @@ import Login from './User/login.vue';
 const routes = [
     {
         path:'',
-        name:'home',
+        name:'Home',
         component:Home
     },
     {
         path:'/about',
-        name:'about',
-        component:About
+        name:'About',
+        component:About,
+        // meta: {Auth: true}
     },
     {
         path:'/contact',
-        name:'contact',
-        component:Contact
+        name:'Contact',
+        component:Contact,
+        // meta: {Auth: true}
     },
     {
         path: '/login',
@@ -34,7 +36,7 @@ const routes = [
     {
         path:'/post',
         children: [
-            { path: "", name:'post', component: PostAll },
+            { path: "", name:'Post', component: PostAll },
             { path: "store", name:'post store', component: PostStore },
             { path: "edit/:postId", name:'post-edit', component: PostEdit }
         ],
@@ -48,8 +50,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const Auth = localStorage.getItem('token')
-    if (to.name !== 'Login' && !Auth) {
+    // const Auth = localStorage.getItem('token')
+    if (to.meta.Auth && !store.getters.getToken.token) {
         next('Login');
     } else {
         next();
