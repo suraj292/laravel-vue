@@ -13,7 +13,7 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/about">About</router-link>
                     </li>
-                    <li class="nav-item dropdown" v-if="store.getters.getToken.token">
+                    <li class="nav-item dropdown" v-if="token">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Post
                         </a>
@@ -26,12 +26,15 @@
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/contact">Contact</router-link>
                     </li>
-                    <li class="nav-item" v-if="!store.getters.getToken.token">
+                    <li class="nav-item" v-if="!token">
                         <router-link class="nav-link active" aria-current="page" to="/login">Login</router-link>
                     </li>
-                    <li class="nav-item" v-if="store.getters.getToken.token">
+                    <li class="nav-item" v-if="token">
                         <span class="nav-link active" @click="logout" style="cursor: pointer">Logout</span>
                     </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li style="margin-right: 20px; ">Cart: {{ 0 }}</li>
                 </ul>
             </div>
         </div>
@@ -40,14 +43,13 @@
 </template>
 
 <script>
-import store from "./connection/store";
+import {StoreUser} from "@/Store/StoreUser";
+import {mapState} from "pinia";
 
 export default {
     name: "App",
     computed: {
-        store() {
-            return store
-        }
+        ...mapState(StoreUser, ['token'])
     },
     data() {
         return {
@@ -59,7 +61,8 @@ export default {
 
         },
         logout(){
-            store.dispatch('removeToken')
+            // store.dispatch('removeToken')
+            StoreUser().removeToken()
             this.$router.push({name: 'Login'})
         }
     }

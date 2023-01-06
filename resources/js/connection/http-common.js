@@ -10,7 +10,7 @@ const http =  axios.create({
 });
 http.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-    // config.headers.Authorization = `Bearer ${store.state.user.token}`
+    // config.headers.Authorization = `Bearer ${store.state.token}`
     return config;
 })
 export default http;

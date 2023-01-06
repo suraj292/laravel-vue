@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 
-import store from "./connection/store.js";
+// import store from "./connection/store.js";
+import {StoreUser} from "@/Store/StoreUser";
 
 import Home from './components/Home.vue';
 import About from './components/About.vue';
@@ -32,6 +33,7 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+        meta: {Auth: false}
     },
     {
         path:'/post',
@@ -51,7 +53,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     // const Auth = localStorage.getItem('token')
-    if (to.meta.Auth && !store.getters.getToken.token) {
+    if (to.meta.Auth === false && StoreUser().token) {
+        next('')
+    }
+    if (to.meta.Auth && !StoreUser().token) {
         next('Login');
     } else {
         next();

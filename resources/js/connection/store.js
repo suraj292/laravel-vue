@@ -4,24 +4,22 @@ const store = createStore({
     state: {
         //define variables
         token: localStorage.getItem('token') || null,
-        user: null
     },
     mutations: {
         // update variable value
         UPDATE_TOKEN(state, payload) {
-            state.token = payload.token
-            state.user = payload.user
+            state.token = payload
         }
     },
     actions: {
         // action to be performed
         setToken(context, payload) {
-            localStorage.setItem('token', payload.token);
+            localStorage.setItem('token', payload);
             context.commit('UPDATE_TOKEN', payload)
         },
         removeToken(context){
             localStorage.removeItem('token');
-            context.commit('UPDATE_TOKEN', {token : null, user : null});
+            context.commit('UPDATE_TOKEN');
         }
 
     },

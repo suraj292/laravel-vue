@@ -18,7 +18,7 @@
 
 <script>
 import http from "../connection/http-common.js";
-import store from "../connection/store.js";
+import {StoreUser} from "@/Store/StoreUser";
 export default {
     name: "login",
     data(){
@@ -34,9 +34,12 @@ export default {
                 email: this.email,
                 password: this.password
             };
+            // const store = StoreUser();
             http.post('/login', data)
                 .then(res => {
-                    store.dispatch('setToken', res.data);
+                    // store.dispatch('setToken', res.data.token);
+                    // StoreUser.setToken(res.data.token)
+                    StoreUser().setToken(res.data.token)
                     this.$router.push({name: 'Home'})
                 })
                 .catch(error => {
@@ -45,7 +48,8 @@ export default {
         },
     },
     mounted() {
-
+        const token = StoreUser().token
+        console.log(token)
     }
 }
 </script>

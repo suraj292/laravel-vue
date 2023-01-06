@@ -19,6 +19,7 @@
                     <td>
                         <router-link class="btn btn-sm btn-primary mx-1" :to="`/post/edit/${post.id}`">Edit</router-link>
                         <button class="btn btn-sm btn-danger mx-1" @click="postDelete(post.id)">Delete</button>
+                        <button class="btn btn-sm btn-success mx-1" @click="addToCart(post.id)">addToCart</button>
                     </td>
                 </tr>
                 </tbody>
@@ -61,6 +62,9 @@ export default {
                 .catch(e => {
                     console.log(e);
                 });
+        },
+        addToCart($id){
+            alert('add to cart clicked '+$id);
         },
         getUser(){
             User.get()
