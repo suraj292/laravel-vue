@@ -31,7 +31,7 @@
 <script>
 import Post from "../connection/PostService";
 import PostStore from "./PostStore.vue";
-import User from "../connection/UserService";
+// import User from "../connection/UserService";
 export default {
     name: "Post",
     components: {PostStore},
@@ -64,22 +64,11 @@ export default {
                 });
         },
         addToCart($id){
-            alert('add to cart clicked '+$id);
+            alert('add to cart clicked, ID : '+$id);
         },
-        getUser(){
-            User.get()
-                .then(response => {
-                    this.user = response.data
-                    console.log(this.user)
-                })
-                .catch(e => {
-                    console.log(e);
-                });
-        }
     },
     mounted() {
         this.getPosts()
-        this.getUser()
     }
 }
 </script>

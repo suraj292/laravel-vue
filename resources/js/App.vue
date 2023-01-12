@@ -23,6 +23,15 @@
 <!--                            <router-link class="dropdown-item" to="/post/edit/:postId">Post edit</router-link>-->
                         </ul>
                     </li>
+                    <li class="nav-item dropdown" v-if="token">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Product
+                        </a>
+                        <ul class="dropdown-menu">
+                            <router-link class="dropdown-item" to="/product">Product All</router-link>
+                            <router-link class="dropdown-item" to="/product/store">Product Create</router-link>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <router-link class="nav-link active" aria-current="page" to="/contact">Contact</router-link>
                     </li>

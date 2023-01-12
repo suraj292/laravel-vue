@@ -6,9 +6,15 @@ import {StoreUser} from "@/Store/StoreUser";
 import Home from './components/Home.vue';
 import About from './components/About.vue';
 import Contact from './components/Contact.vue';
+
 import PostAll from './Post/Post.vue';
 import PostStore from './Post/PostStore.vue';
 import PostEdit from './Post/PostEdit.vue';
+
+import Product from "./Product/Product.vue";
+import ProductStore from "./Product/ProductStore.vue";
+import ProductEdit from "./Product/ProductEdit.vue";
+
 import Login from './User/login.vue';
 
 const routes = [
@@ -41,6 +47,15 @@ const routes = [
             { path: "", name:'Post', component: PostAll },
             { path: "store", name:'post store', component: PostStore },
             { path: "edit/:postId", name:'post-edit', component: PostEdit }
+        ],
+        meta: {Auth: true}
+    },
+    {
+        path:'/Product',
+        children: [
+            { path: "", name:'product', component: Product },
+            { path: "store", name:'productStore', component: ProductStore },
+            { path: "edit/:postId", name:'product_edit', component: ProductEdit }
         ],
         meta: {Auth: true}
     },
