@@ -11,9 +11,8 @@
                     <label for="image" class="form-label">Image</label>
 <!--                    <input type="file" class="form-control" id="image" name="image" ref="fileInput" @change="imageUpload">-->
                     <input type="file" class="form-control" id="image" name="image" ref="fileInput" v-on:change="imageUpload">
-                    <div class="form-text text-danger" v-if="errors && errors.image">{{ errors.image[0] }}</div>
-                    <div class="image-parent">
-                        <div id="imagePreview" :style="{'background-image': `url(${url})`}"></div>
+                    <div class="image-parent p-3" >
+                        <img v-bind:src="url" alt="image">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -93,11 +92,8 @@ export default {
 }
 .image-parent{
     width: 50%;
-    height: 165px;
-    margin-top: 10px;
 }
-#imagePreview{
-    background-repeat: no-repeat;
-    height: 210px;
+.image-parent img{
+    width: 70%;
 }
 </style>

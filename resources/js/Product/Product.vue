@@ -23,6 +23,7 @@
                     <td>
                         <router-link class="btn btn-sm btn-primary mx-1" :to="`/product/edit/${product.id}`">Edit</router-link>
                         <button class="btn btn-sm btn-danger mx-1" @click="productDelete(product.id)">Delete</button>
+                        <button class="btn btn-sm btn-success mx-1" @click="addToCart(product)">AddToCart</button>
                     </td>
                 </tr>
                 </tbody>
@@ -50,6 +51,10 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+        },
+        addToCart(product){
+            // alert({product})
+          console.log(product)
         },
         productDelete($id){
             ProductService.delete($id)

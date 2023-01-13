@@ -76,23 +76,31 @@ class ProductController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'image|required',
             'price' => 'integer|required',
             'offer' => 'integer|nullable'
         ]);
-        $image = $request->image->store('image');
-        $data = [
-            'title' => $request->title,
-            'image' => 'storage/'.$image,
-            'price' => $request->price,
-            'offer' => $request->offer,
-        ];
+        if ($request->image){
+            $request->validate(['image'=>'image']);
+            $image = $request->image->store('image');
+            $data = [
+                'title' => $request->title,
+                'image' => 'storage/'.$image,
+                'price' => $request->price,
+                'offer' => $request->offer,
+            ];
+        }else {
+            $data = [
+                'title' => $request->title,
+                'price' => $request->price,
+                'offer' => $request->offer,
+            ];
+        }
         $product->update($data);
 
         return response([
             'status' => true,
             'message' => 'Product updated successfully.',
-            'post' => $product
+            'product' => $product
         ], 200);
     }
 
