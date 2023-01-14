@@ -34,6 +34,7 @@
 
 <script>
 import ProductService from "@/connection/ProductService";
+import {StoreCart} from "@/Store/StoreCart";
 export default {
     name: "Product",
     data() {
@@ -53,8 +54,15 @@ export default {
                 })
         },
         addToCart(product){
-            // alert({product})
-          console.log(product)
+            const data = {
+                id: product.id,
+                title: product.title,
+                image: product.image,
+                price: product.price,
+                offer: product.offer,
+                quantity: 1
+            }
+          StoreCart().addProduct(data)
         },
         productDelete($id){
             ProductService.delete($id)
